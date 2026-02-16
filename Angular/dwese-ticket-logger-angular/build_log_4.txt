@@ -1,0 +1,49 @@
+
+> dwese-ticket-logger-angular@0.0.0 build
+> ng build
+
+[33m❯[39m Building...
+[32m✔[39m Building...
+Application bundle generation failed. [3.633 seconds] - 2026-02-12T15:07:28.090Z
+
+[1m[31m[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'webSocketUrl' does not exist on type '{ production: boolean; apiUrl: string; WebSocketUrl: string; WebSocketBroker: string; }'. Did you mean 'WebSocketUrl'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/services/notification.ts:14:34:
+[37m      14 │ ...e apiUrl = `${environment.[32mwebSocketUrl[37m}/notifications`; // URL ...
+         ╵                              [32m~~~~~~~~~~~~[0m
+
+  'WebSocketUrl' is declared here.
+
+    src/app/core/environments/environment.ts:4:4:
+[37m      4 │     [32mWebSocketUrl:'ws://localhost:8080/ws'[37m,
+        ╵     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'webSocketBroker' does not exist on type '{ production: boolean; apiUrl: string; WebSocketUrl: string; WebSocketBroker: string; }'. Did you mean 'WebSocketBroker'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/core/services/notification.ts:47:32:
+[37m      47 │ ...okerURL: `${environment.[32mwebSocketBroker[37m}`, // URL del servidor ...
+         ╵                            [32m~~~~~~~~~~~~~~~[0m
+
+  'WebSocketBroker' is declared here.
+
+    src/app/core/environments/environment.ts:5:4:
+[37m      5 │     [32mWebSocketBroker:'ws://localhost:8080/ws'[37m,
+        ╵     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31mX [41;31m[[41;97mERROR[41;31m][0m [1mNG8001: 'app-notifications' is not a known element:
+1. If 'app-notifications' is an Angular component, then verify that it is included in the '@Component.imports' of this component.
+2. If 'app-notifications' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@Component.schemas' of this component to suppress this message.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/layout/header/header.html:13:8:
+[37m      13 │         [32m<app-notifications *ngIf="isLoggedIn">[37m</app-notifications>
+         ╵         [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  Error occurs in the template of component HeaderComponent.
+
+    src/app/layout/header/header.ts:10:15:
+[37m      10 │   templateUrl: [32m'./header.html'[37m,
+         ╵                [32m~~~~~~~~~~~~~~~[0m
+
+[39m[22m
