@@ -1,9 +1,6 @@
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:8080/api',
-    webSocketUrl: 'ws://localhost:8080/ws',
-    webSocketBroker: 'ws://localhost:8080/ws',
-
+    apiUrl: 'http://aortben.alixarblue.team:8080/api',
+    webSocketUrl: 'ws://aortben.alixarblue.team:8080/ws',
+    webSocketBroker: 'ws://aortben.alixarblue.team:8080/ws',
 };
-
-
