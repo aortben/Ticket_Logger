@@ -18,7 +18,7 @@ export class NotificationService {
     @Inject(PLATFORM_ID) private platformId: Object,
     private http: HttpClient,
     private injector: Injector // Se usa para obtener AuthService de forma diferida
-  ) {}
+  ) { }
 
   /**
    * Conecta al WebSocket de notificaciones
