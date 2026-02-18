@@ -5,5 +5,3 @@ export const environment = {
     webSocketBroker: '/ws',
 
 };
-
-
