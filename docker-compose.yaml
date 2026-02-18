@@ -1,0 +1,76 @@
+services:
+
+  node:
+    command: sh -c "npm install && npm start -- --host 0.0.0.0"
+    build:
+      context: ./Angular/dwese-ticket-logger-angular
+      dockerfile: Dockerfile
+    user: "node"
+    working_dir: /home/node/app
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./Angular/dwese-ticket-logger-angular:/home/node/app
+    networks:
+      - app_network
+
+  backend:
+    build:
+      context: ./Backend/dwese_ticket_logger_api
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./.env:/app/.env
+      - ./Backend/dwese_ticket_logger_api/certs:/app/certs
+      - ./Backend/dwese_ticket_logger_api/images:/app/images
+    environment:
+      JWT_KEYSTORE_PATH: /app/certs/jwt-keystore.jks
+      JWT_KEYSTORE_PASSWORD: ${JWT_KEYSTORE_PASSWORD}
+      JWT_KEYSTORE_ALIAS: ${JWT_KEYSTORE_ALIAS}
+    env_file:
+      - ./.env
+    networks:
+      - app_network
+    restart: always
+    depends_on:
+      - db
+
+  db:
+    container_name: db
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${DB_DATABASE}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - database_data:/var/lib/mysql
+    networks:
+      - app_network
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    ports:
+      - "8081:80"
+    volumes:
+      - phpmyadmin_data:/sessions
+    networks:
+      - app_network
+    restart: always
+
+volumes:
+  phpmyadmin_data:
+  database_data:
+
+networks:
+  app_network:
+    driver: bridge
